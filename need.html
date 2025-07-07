@@ -4,7 +4,252 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Why the World Needs TraceTutor</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #667eea;
+    }
+
+    .problem-section {
+      padding: 120px 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .problem-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .problem-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .problem-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .problem-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .problem-card a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .problem-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Market Need Section */
+    .market-need-section {
+      margin-top: 4rem;
+      padding: 2rem 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      margin-bottom: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .quotes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .quote-category {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .reddit-title {
+      color: #ff4500;
+    }
+
+    .linkedin-title {
+      color: #0077b5;
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .quote-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 1.5rem;
+      border-radius: 15px;
+      font-size: 1rem;
+      line-height: 1.4;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .quote-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+      color: white;
+    }
+
+    .quote-button:active {
+      transform: translateY(-1px);
+    }
+
+    .reddit-quote {
+      background: linear-gradient(135deg, #ff4500 0%, #ff6b35 100%);
+    }
+
+    .linkedin-quote {
+      background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
+    }
+
+    .footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .problems-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quote-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .problem-section {
+        padding: 100px 1rem 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -35,7 +280,7 @@
         <div class="problem-card">
           <div class="problem-icon">📚</div>
           <h3 class="problem-title">Outdated & Theoretical Curriculum</h3>
-          <p>"There’s little to no training for printed circuit board design. Students get a lot of theory—very little hands-on design experience." — <a href="https://rigidflexpcb.org/the-state-of-pcb-design-education-challenges-innovations-and-future-directions/" target="_blank">RigidFlexPCB.org</a></p>
+          <p>"There's little to no training for printed circuit board design. Students get a lot of theory—very little hands-on design experience." — <a href="https://rigidflexpcb.org/the-state-of-pcb-design-education-challenges-innovations-and-future-directions/" target="_blank">RigidFlexPCB.org</a></p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">⚙️</div>
@@ -50,7 +295,58 @@
         <div class="problem-card">
           <div class="problem-icon">🌍</div>
           <h3 class="problem-title">The World Needs Practical Training</h3>
-          <p>"What they quickly learned was that many of these engineers didn’t have the training necessary to do even basic PCB designs." — <a href="https://www.protoexpress.com/blog/how-to-become-a-pcb-designer/" target="_blank">ProtoExpress</a></p>
+          <p>"What they quickly learned was that many of these engineers didn't have the training necessary to do even basic PCB designs." — <a href="https://www.protoexpress.com/blog/how-to-become-a-pcb-designer/" target="_blank">ProtoExpress</a></p>
+        </div>
+      </div>
+
+      <!-- Market Need Section -->
+      <div class="market-need-section">
+        <h2 class="section-title">Market Need for TraceTutor – Quotes & Source Links</h2>
+        
+        <div class="quotes-container">
+          <!-- Reddit Quotes -->
+          <div class="quote-category">
+            <h3 class="category-title reddit-title">🔴 Reddit Quotes</h3>
+            <div class="quote-grid">
+              <a href="https://www.reddit.com/r/AskElectronics/comments/1iqph7q/my_university_doesnt_teach_pcb_design_so_i/" target="_blank" class="quote-button reddit-quote">
+                "Find out 2 weeks before the boards are needed… that the person… has no idea how to design a PCB..."
+              </a>
+              
+              <a href="https://www.reddit.com/r/PrintedCircuitBoard/comments/ici8hk/how_does_one_get_started_with_pcb_design/" target="_blank" class="quote-button reddit-quote">
+                "Spend 48 sleepless hours… learning how to design a PCB… to get the boards back just in time."
+              </a>
+              
+              <a href="https://www.reddit.com/r/ElectricalEngineering/comments/mktxja/things_that_should_be_taught_at_the_undergrad/" target="_blank" class="quote-button reddit-quote">
+                "My university's reasoning for not teaching PCB design was that it was something we could learn on our own."
+              </a>
+              
+              <a href="https://www.reddit.com/r/AskElectronics/comments/7dd9mh/can_i_make_a_pcb_in_25_weeks_with_no_experience/" target="_blank" class="quote-button reddit-quote">
+                "My uni doesn't teach PCB design so I thought I would teach myself... started with youtube videos…"
+              </a>
+              
+              <a href="https://www.reddit.com/r/ElectricalEngineering/comments/1ilcx4l/my_university_doesnt_teach_pcb_design_so_im/" target="_blank" class="quote-button reddit-quote">
+                "My uni doesn't teach PCB design so I thought I would teach myself... started with youtube videos…"
+              </a>
+            </div>
+          </div>
+
+          <!-- LinkedIn Posts -->
+          <div class="quote-category">
+            <h3 class="category-title linkedin-title">🔗 LinkedIn Posts</h3>
+            <div class="quote-grid">
+              <a href="https://www.linkedin.com/posts/knmackey_%F0%9D%97%AA%F0%9D%97%AE%F0%9D%97%BB%F0%9D%98%81-activity-7299107205805416449-b-Mc" target="_blank" class="quote-button linkedin-quote">
+                "Beginner to hardware job interview in 30–90 days after PCB learning"
+              </a>
+              
+              <a href="https://www.linkedin.com/posts/dario-fresu_fresuelectronics-pcbdesign-emc-activity-7263171057019228160-Xa2-" target="_blank" class="quote-button linkedin-quote">
+                "EMI, SI, and PCB complexity quotes from Dario Fresu (Post 1)"
+              </a>
+              
+              <a href="https://www.linkedin.com/posts/dario-fresu_fresuelectronics-pcbdesign-electronics-activity-7259464262492766208-oLAg" target="_blank" class="quote-button linkedin-quote">
+                "EMI, SI, and PCB complexity quotes from Dario Fresu (Post 2)"
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
